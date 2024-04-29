@@ -38,7 +38,7 @@ GoRight={
 
 [physics]
 
-2d/default_gravity=330.0
+2d/default_gravity=600.0
 
 [rendering]
 
