@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://coexos0c5yrby"]
+
+[ext_resource type="Texture2D" uid="uid://duwjtmxppqdwg" path="res://Assets/Premium Platformer Asset Pack/Enemies/Slime.png" id="1_ebemi"]
+[ext_resource type="Script" path="res://Scenes/Enemies/Slime.gd" id="1_sbour"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idwqo"]
+atlas = ExtResource("1_ebemi")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub6wh"]
+atlas = ExtResource("1_ebemi")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rkya4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idwqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub6wh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_towvs"]
+size = Vector2(6, 8)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_sbour")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rkya4")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+shape = SubResource("RectangleShape2D_towvs")
