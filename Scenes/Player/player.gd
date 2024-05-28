@@ -4,7 +4,7 @@ class_name Player
 signal hit
 
 @export_group("Spawn")
-@export var spawn_position: Vector2
+@onready var spawn_position: Vector2 = position
 @export_group("Walk")
 @export var move_speed = 100.0
 @export var move_acceleration = 10

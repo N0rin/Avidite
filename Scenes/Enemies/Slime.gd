@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name Slime
 
 @export_group("Spawn")
-@export var spawn_position: Vector2
+var spawn_position: Vector2
+@export var facing_right = true
 @export_group("Walk")
 @export var move_speed = 30.0
 @export var move_acceleration = 10
@@ -18,6 +19,11 @@ class_name Slime
 @onready var animation = $Flip/Animation
 @onready var ground_detector = $Flip/GroundDetector
 var direction = 1
+
+func _ready():
+	spawn_position = position
+	reset()
+	change_direction()
 
 func _physics_process(delta):
 	
@@ -46,5 +52,9 @@ func change_direction():
 	flip.scale.x *= -1
 
 func reset():
-	direction = 1
-	flip.scale.x = 1
+	if facing_right:
+		direction = 1
+		flip.scale.x = 1
+	else:
+		direction = -1
+		flip.scale.x = -1
