@@ -68,9 +68,9 @@ func _physics_process(delta):
 	if jump_input > 0 and wall_timer < wall_jump_buffer:
 		var jump_direction = Vector2(0, -1)
 		if get_wall_normal().x < 0:
-			jump_direction = jump_direction.from_angle(-PI/2 - wall_jump_angle)
+			jump_direction = jump_direction.rotated(-wall_jump_angle)
 		if get_wall_normal().x > 0:
-			jump_direction = jump_direction.from_angle(-PI/2 + wall_jump_angle)
+			jump_direction = jump_direction.rotated(wall_jump_angle)
 		velocity = jump_direction * jump_velocity * wall_jump_strength
 		jump_input = 0
 	

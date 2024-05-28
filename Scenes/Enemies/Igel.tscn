@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1hi6crwlt72i"]
+
+[ext_resource type="Texture2D" uid="uid://butq8vtssimqw" path="res://Assets/Premium Platformer Asset Pack/Enemies/Spindrill_Shuffler.png" id="1_0wmlq"]
+[ext_resource type="Script" path="res://Scenes/Enemies/Igel.gd" id="1_h3iv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lixbv"]
+size = Vector2(7, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xff7m"]
+atlas = ExtResource("1_0wmlq")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4qrf"]
+atlas = ExtResource("1_0wmlq")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs05c"]
+atlas = ExtResource("1_0wmlq")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwdjb"]
+atlas = ExtResource("1_0wmlq")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbtoe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xff7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4qrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs05c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwdjb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oq2t0"]
+size = Vector2(8, 8)
+
+[node name="Igel" type="CharacterBody2D"]
+script = ExtResource("1_h3iv2")
+move_speed = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_lixbv")
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Animation" type="AnimatedSprite2D" parent="Flip"]
+sprite_frames = SubResource("SpriteFrames_pbtoe")
+
+[node name="GroundDetector" type="Area2D" parent="Flip"]
+
+[node name="CollisionSquare" type="CollisionShape2D" parent="Flip/GroundDetector"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_oq2t0")
