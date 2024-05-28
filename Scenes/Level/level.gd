@@ -10,12 +10,7 @@ func reset():
 		if object is CharacterBody2D:
 			object.velocity = Vector2.ZERO
 			object.position = object.spawn_position
-			if object is Player:
-				object.reset()
-			if object is Slime:
-				object.direction = 1
-
-
+			object.reset()
 
 func _on_player_hit():
 	reset()

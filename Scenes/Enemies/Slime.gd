@@ -14,7 +14,9 @@ class_name Slime
 @onready var jump_velocity = 4 * (jump_height / jump_duration)
 @onready var gravity = 2 * (jump_velocity / jump_duration)
 
-@onready var animation = $Animation
+@onready var flip = $Flip
+@onready var animation = $Flip/Animation
+@onready var ground_detector = $Flip/GroundDetector
 var direction = 1
 
 func _physics_process(delta):
@@ -23,8 +25,10 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	if is_on_wall():
-		direction *= -1
+		change_direction()
 	
+	if not ground_detector.has_overlapping_bodies():
+		change_direction()
 	
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * move_speed, move_acceleration)
@@ -35,9 +39,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func play_animation():
-	if velocity.x < 0:
-		animation.flip_h = true
-	elif velocity.x > 0:
-		animation.flip_h = false
-	
 	animation.play("default")
+
+func change_direction():
+	direction *= -1
+	flip.scale.x *= -1
+
+func reset():
+	direction = 1
+	flip.scale.x = 1

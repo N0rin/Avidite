@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://coexos0c5yrby"]
+[gd_scene load_steps=8 format=3 uid="uid://coexos0c5yrby"]
 
 [ext_resource type="Texture2D" uid="uid://duwjtmxppqdwg" path="res://Assets/Premium Platformer Asset Pack/Enemies/Slime.png" id="1_ebemi"]
 [ext_resource type="Script" path="res://Scenes/Enemies/Slime.gd" id="1_sbour"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_towvs"]
+size = Vector2(6, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idwqo"]
 atlas = ExtResource("1_ebemi")
@@ -25,15 +28,23 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_towvs"]
-size = Vector2(6, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu3ym"]
+size = Vector2(8, 8)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_sbour")
 
-[node name="Animation" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_rkya4")
-
 [node name="Collision" type="CollisionShape2D" parent="."]
 show_behind_parent = true
 shape = SubResource("RectangleShape2D_towvs")
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Animation" type="AnimatedSprite2D" parent="Flip"]
+sprite_frames = SubResource("SpriteFrames_rkya4")
+
+[node name="GroundDetector" type="Area2D" parent="Flip"]
+
+[node name="CollisionSquare" type="CollisionShape2D" parent="Flip/GroundDetector"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_nu3ym")
