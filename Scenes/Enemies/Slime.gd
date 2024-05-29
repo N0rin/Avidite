@@ -34,6 +34,8 @@ func change_direction():
 	flip.scale.x *= -1
 
 func reset():
+	super()
+	
 	if facing_right:
 		direction = 1
 		flip.scale.x = 1

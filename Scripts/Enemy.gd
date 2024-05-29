@@ -21,7 +21,9 @@ func _ready():
 	set_spawn()
 
 func reset():
-	pass
+	velocity = Vector2.ZERO
+	position = spawn_position
 
 func set_spawn():
 	spawn_position = position
+

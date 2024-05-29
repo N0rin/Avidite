@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://thp5i2gxube2"]
+[gd_scene load_steps=9 format=3 uid="uid://thp5i2gxube2"]
 
 [ext_resource type="Texture2D" uid="uid://cdvymj6nua644" path="res://Assets/Premium Platformer Asset Pack/EVERYTHING/EVERYTHING.png" id="1_j5gwm"]
 [ext_resource type="Script" path="res://Scenes/Level/level.gd" id="1_w7vxh"]
 [ext_resource type="PackedScene" uid="uid://coexos0c5yrby" path="res://Scenes/Enemies/Slime.tscn" id="2_8vqm2"]
 [ext_resource type="PackedScene" uid="uid://bfkbjdr7y25ij" path="res://Scenes/Player/player.tscn" id="2_jytmv"]
 [ext_resource type="PackedScene" uid="uid://d1hi6crwlt72i" path="res://Scenes/Enemies/Igel.tscn" id="5_hwijk"]
+[ext_resource type="PackedScene" uid="uid://b60suko7qmc01" path="res://Scenes/Enemies/Scout.tscn" id="6_08i77"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_png6x"]
 texture = ExtResource("1_j5gwm")
@@ -4916,6 +4917,27 @@ rotation = 1.5708
 [node name="Igel4" parent="TileMap" instance=ExtResource("5_hwijk")]
 position = Vector2(105, -46)
 rotation = -1.5708
+
+[node name="Scout" parent="TileMap" instance=ExtResource("6_08i77")]
+position = Vector2(180, 74)
+distance = 200
+move_speed = 20.0
+
+[node name="Scout2" parent="TileMap" instance=ExtResource("6_08i77")]
+position = Vector2(279, 50)
+move_speed = 20.0
+
+[node name="Scout3" parent="TileMap" instance=ExtResource("6_08i77")]
+position = Vector2(261, 19)
+move_speed = 20.0
+
+[node name="Scout4" parent="TileMap" instance=ExtResource("6_08i77")]
+position = Vector2(292, -78)
+move_speed = 20.0
+
+[node name="Scout5" parent="TileMap" instance=ExtResource("6_08i77")]
+position = Vector2(378, -79)
+move_speed = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -28)

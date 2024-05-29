@@ -39,10 +39,8 @@ var ignore = false
 
 func _physics_process(delta):
 
-	var debug_velocity = velocity
-	
 	if not is_on_floor():
-		velocity.y += gravity * delta * get_gravity_factor(delta)
+		velocity.y += gravity * delta * get_gravity_factor()
 		fall_of_time += delta
 		jump_timer += delta
 
@@ -119,7 +117,7 @@ func play_character_animation():
 	elif velocity.y >= 0:
 		animation.play("fall")
 
-func get_gravity_factor(delta) -> float:
+func get_gravity_factor() -> float:
 	var gravity_factor = 1
 	
 	if velocity.y < -10 and not Input.is_action_pressed("Jump"):
@@ -132,3 +130,4 @@ func get_gravity_factor(delta) -> float:
 
 func reset():
 	velocity = Vector2.ZERO
+	position = spawn_position
