@@ -12,3 +12,9 @@ func reset():
 
 func _on_player_hit():
 	reset()
+
+
+func _on_start_delay_timeout():
+	for object in $TileMap.get_children():
+		if object.has_method("activate"):
+			object.activate()

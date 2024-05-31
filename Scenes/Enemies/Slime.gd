@@ -10,8 +10,7 @@ func _ready():
 	reset()
 	change_direction()
 
-func _physics_process(delta):
-	
+func set_movement(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -22,9 +21,6 @@ func _physics_process(delta):
 		change_direction()
 
 	velocity.x = move_toward(velocity.x, direction * move_speed, move_acceleration)
-	
-	play_animation()
-	move_and_slide()
 
 func play_animation():
 	animation.play("default")
@@ -42,3 +38,6 @@ func reset():
 	else:
 		direction = -1
 		flip.scale.x = -1
+
+func activate():
+	super()

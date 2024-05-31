@@ -8,6 +8,7 @@ class_name Scout
 @onready var vision_shape = $Flip/VisionShape
 @onready var turn_timer = $TurnTimer
 @onready var flee_timer = $FleeTimer
+@onready var lookout_timer = $LookoutTimer
 
 @export_group("Vision")
 @export var target: Node
@@ -17,12 +18,10 @@ class_name Scout
 var walking = true
 
 func _ready():
-	spawn_position = position
-	reset()
+	super()
 	set_vision()
 
-func _physics_process(delta):
-	
+func set_movement(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -35,8 +34,6 @@ func _physics_process(delta):
 	if walking:
 		velocity.x = move_toward(velocity.x, direction * move_speed, move_acceleration)
 	
-	play_animation()
-	move_and_slide()
 
 func play_animation():
 	animation.play("default")
@@ -44,15 +41,21 @@ func play_animation():
 func change_direction():
 	if turn_timer.time_left > 0:
 		return
+	if lookout_timer.time_left > 0 and not ground_detector.has_overlapping_bodies():
+		stop_walking()
+		return
+	
 	toggle_direction()
 	deactivate_vision()
 	turn_timer.start()
 	
 func _on_turn_timer_timeout():
 	activate_vision()
+	lookout_timer.start()
 
 func _on_vision_detector_body_entered(body):
 	if body is Player and flee_timer.time_left <= 0:
+		walking = true
 		flee_timer.start()
 		toggle_direction()
 		deactivate_vision()
@@ -93,6 +96,12 @@ func toggle_direction():
 	direction *= -1
 	flip.scale.x *= -1
 
+func _on_lookout_timer_timeout():
+	walking = true
 
+func stop_walking():
+	walking = false
+	velocity.x = 0
 
-
+func activate():
+	super()
