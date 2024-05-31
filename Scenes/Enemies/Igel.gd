@@ -8,6 +8,10 @@ class_name Igel
 @onready var animation = $Flip/Animation
 @onready var ground_detector = $Flip/GroundDetector
 
+func _ready():
+	super()
+	up_direction = Vector2(0,-1).rotated(rotation)
+
 func set_movement(delta):
 	velocity = velocity.rotated(-rotation)
 	
@@ -33,8 +37,6 @@ func change_direction():
 
 func reset():
 	super()
-	
-	up_direction = Vector2(0,-1).rotated(rotation)
 	
 	if facing_right:
 		direction = 1

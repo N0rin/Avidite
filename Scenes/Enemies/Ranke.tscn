@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://drfs4nd180k5l"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Ranke.gd" id="1_46nc7"]
+[ext_resource type="Texture2D" uid="uid://kds63sbsx752" path="res://Assets/Premium Platformer Asset Pack/Items & Gimmicks/Vines.png" id="2_tp6tf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1wik"]
+atlas = ExtResource("2_tp6tf")
+region = Rect2(0, 0, 8, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j4j4s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1wik")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jnle"]
+size = Vector2(6, 1)
+
+[node name="Ranke" type="CharacterBody2D"]
+script = ExtResource("1_46nc7")
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Animation" type="AnimatedSprite2D" parent="Flip"]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_j4j4s")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4jnle")
