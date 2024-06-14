@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://thp5i2gxube2"]
+[gd_scene load_steps=11 format=3 uid="uid://thp5i2gxube2"]
 
 [ext_resource type="Texture2D" uid="uid://cdvymj6nua644" path="res://Assets/Premium Platformer Asset Pack/EVERYTHING/EVERYTHING.png" id="1_j5gwm"]
 [ext_resource type="Script" path="res://Scenes/Level/level.gd" id="1_w7vxh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1hi6crwlt72i" path="res://Scenes/Enemies/Igel.tscn" id="5_hwijk"]
 [ext_resource type="PackedScene" uid="uid://b60suko7qmc01" path="res://Scenes/Enemies/Scout.tscn" id="6_08i77"]
 [ext_resource type="PackedScene" uid="uid://dulosoj2dmotn" path="res://Scenes/Enemies/JumpScout.tscn" id="7_fiuj5"]
+[ext_resource type="PackedScene" uid="uid://drfs4nd180k5l" path="res://Scenes/Enemies/Ranke.tscn" id="8_xgefi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_png6x"]
 texture = ExtResource("1_j5gwm")
@@ -4932,6 +4933,9 @@ move_speed = 20.0
 [node name="JumpScout" parent="TileMap" instance=ExtResource("7_fiuj5")]
 position = Vector2(306, 84)
 jump_height = 16.0
+
+[node name="Ranke" parent="TileMap" instance=ExtResource("8_xgefi")]
+position = Vector2(2, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(3, 53)
