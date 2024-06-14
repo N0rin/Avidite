@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dulosoj2dmotn"]
+[gd_scene load_steps=12 format=3 uid="uid://dulosoj2dmotn"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/JumpScout.gd" id="1_67h0u"]
 [ext_resource type="Texture2D" uid="uid://c68bil5uout1j" path="res://Assets/Premium Platformer Asset Pack/Enemies/MEGA-Mad_Marshmallow.png" id="2_depe8"]
+[ext_resource type="PackedScene" uid="uid://2ee73vp5aav5" path="res://Scenes/Enemies/vision_cone.tscn" id="3_6eu1m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bvsp"]
 atlas = ExtResource("2_depe8")
@@ -48,7 +49,9 @@ size = Vector2(4, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1s3jw"]
 size = Vector2(7, 7)
 
-[node name="JumpScout" type="CharacterBody2D"]
+[node name="JumpScout" type="CharacterBody2D" groups=["Creature"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_67h0u")
 
 [node name="Flip" type="Node2D" parent="."]
@@ -58,12 +61,15 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_qpnvh")
 
 [node name="GroundDetector" type="Area2D" parent="Flip"]
+collision_layer = 0
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/GroundDetector"]
 position = Vector2(8, 16)
 shape = SubResource("RectangleShape2D_3d2by")
 
 [node name="WallDetector1" type="Area2D" parent="Flip"]
+collision_layer = 0
+collision_mask = 5
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/WallDetector1"]
 position = Vector2(8, 0)
@@ -71,28 +77,22 @@ shape = SubResource("RectangleShape2D_r7fon")
 
 [node name="WallDetector2" type="Area2D" parent="Flip"]
 position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 5
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/WallDetector2"]
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_r7fon")
 
 [node name="WallDetector3" type="Area2D" parent="Flip"]
+collision_layer = 0
+collision_mask = 5
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/WallDetector3"]
 position = Vector2(10, -16)
 shape = SubResource("RectangleShape2D_r7fon")
 
-[node name="VisionDetector" type="Area2D" parent="Flip"]
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Flip/VisionDetector"]
-position = Vector2(4, 4)
-polygon = PackedVector2Array(0, 0, 80, 0, 80, -24, 0, -7)
-
-[node name="VisionShape" type="Polygon2D" parent="Flip"]
-position = Vector2(4, 4)
-color = Color(1, 0.0784314, 0.0352941, 0.32549)
-polygon = PackedVector2Array(0, 0, 80, 0, 80, -24, 0, -7)
+[node name="VisionCone" parent="Flip" instance=ExtResource("3_6eu1m")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -112,6 +112,6 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[connection signal="body_entered" from="Flip/VisionDetector" to="." method="_on_vision_detector_body_entered"]
+[connection signal="detected" from="Flip/VisionCone" to="." method="_on_vision_cone_detected"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]

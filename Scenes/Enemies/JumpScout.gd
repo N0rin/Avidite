@@ -28,17 +28,17 @@ func set_movement(delta):
 				velocity.y = -jump_velocity * 0.8
 	
 func _on_turn_timer_timeout():
-	activate_vision()
+	vision_cone.activate()
 
 func _on_vision_detector_body_entered(body):
 	if body is Player and flee_timer.time_left <= 0:
 		flee_timer.start()
 		toggle_direction()
-		deactivate_vision()
+		vision_cone.deactivate()
 		move_speed *= 2
 
 func _on_flee_timer_timeout():
 	move_speed /= 2
-	activate_vision()
+	vision_cone.activate()
 
 

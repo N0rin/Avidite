@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfkbjdr7y25ij"]
+[gd_scene load_steps=16 format=3 uid="uid://bfkbjdr7y25ij"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_oya0g"]
 [ext_resource type="Texture2D" uid="uid://c8plhva8y44q4" path="res://Assets/Premium Platformer Asset Pack/Player/ALL_PLAYER.png" id="1_up7kt"]
@@ -95,7 +95,13 @@ animations = [{
 radius = 3.0
 height = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_miufl"]
+radius = 3.1
+height = 7.2
+
+[node name="Player" type="CharacterBody2D" groups=["Creature"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_oya0g")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
@@ -105,3 +111,13 @@ animation = &"fall"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("CapsuleShape2D_5h7wm")
+
+[node name="HitDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetection"]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_miufl")
+
+[connection signal="area_entered" from="HitDetection" to="." method="_on_hit_detection_area_entered"]

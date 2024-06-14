@@ -4909,33 +4909,23 @@ remote_path = NodePath("../../../Camera2D")
 show_behind_parent = true
 position = Vector2(40, 84)
 
+[node name="Slime2" parent="TileMap" instance=ExtResource("2_8vqm2")]
+show_behind_parent = true
+position = Vector2(174, 77)
+
 [node name="Igel3" parent="TileMap" instance=ExtResource("5_hwijk")]
 position = Vector2(-84, 47)
 rotation = 1.5708
 
-[node name="Scout" parent="TileMap" instance=ExtResource("6_08i77")]
-position = Vector2(102, -36)
-
-[node name="Scout5" parent="TileMap" instance=ExtResource("6_08i77")]
-position = Vector2(49, 3)
-
-[node name="Scout2" parent="TileMap" instance=ExtResource("6_08i77")]
-position = Vector2(609, -4)
-
-[node name="Scout3" parent="TileMap" instance=ExtResource("6_08i77")]
-position = Vector2(637, 44)
-move_speed = 20.0
-
-[node name="Scout4" parent="TileMap" instance=ExtResource("6_08i77")]
-position = Vector2(776, -52)
-move_speed = 20.0
-
-[node name="JumpScout" parent="TileMap" instance=ExtResource("7_fiuj5")]
-position = Vector2(306, 84)
-jump_height = 16.0
-
 [node name="Ranke" parent="TileMap" instance=ExtResource("8_xgefi")]
 position = Vector2(2, -16)
+
+[node name="JumpScout" parent="TileMap" instance=ExtResource("7_fiuj5")]
+position = Vector2(200, 76)
+
+[node name="Scout" parent="TileMap" node_paths=PackedStringArray("target") instance=ExtResource("6_08i77")]
+position = Vector2(66, 4)
+target = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(3, 53)

@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://2ee73vp5aav5"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/VisionCone.gd" id="1_mfwdu"]
+
+[node name="VisionCone" type="Node2D"]
+script = ExtResource("1_mfwdu")
+collision_mask = 5
+
+[node name="Ray" type="RayCast2D" parent="."]
+rotation = -1.51844
+target_position = Vector2(0, 80)
+
+[node name="Ray7" type="RayCast2D" parent="."]
+rotation = -1.53589
+target_position = Vector2(0, 80)
+
+[node name="Ray8" type="RayCast2D" parent="."]
+rotation = -1.55334
+target_position = Vector2(0, 80)
+
+[node name="Ray2" type="RayCast2D" parent="."]
+rotation = -1.5708
+target_position = Vector2(0, 80)
+
+[node name="Ray9" type="RayCast2D" parent="."]
+rotation = -1.58825
+target_position = Vector2(0, 80)
+
+[node name="Ray10" type="RayCast2D" parent="."]
+rotation = -1.6057
+target_position = Vector2(0, 80)
+
+[node name="Ray3" type="RayCast2D" parent="."]
+rotation = -1.62316
+target_position = Vector2(0, 80)
+
+[node name="Ray11" type="RayCast2D" parent="."]
+rotation = -1.64061
+target_position = Vector2(0, 80)
+
+[node name="Ray12" type="RayCast2D" parent="."]
+rotation = -1.65806
+target_position = Vector2(0, 80)
+
+[node name="Ray4" type="RayCast2D" parent="."]
+rotation = -1.67552
+target_position = Vector2(0, 80)
+
+[node name="Ray13" type="RayCast2D" parent="."]
+rotation = -1.69297
+target_position = Vector2(0, 80)
+
+[node name="Ray14" type="RayCast2D" parent="."]
+rotation = -1.71042
+target_position = Vector2(0, 80)
+
+[node name="Ray5" type="RayCast2D" parent="."]
+rotation = -1.72788
+target_position = Vector2(0, 80)
+
+[node name="Ray15" type="RayCast2D" parent="."]
+rotation = -1.74533
+target_position = Vector2(0, 80)
+
+[node name="Ray16" type="RayCast2D" parent="."]
+rotation = -1.76278
+target_position = Vector2(0, 80)
+
+[node name="Ray6" type="RayCast2D" parent="."]
+rotation = -1.78024
+target_position = Vector2(0, 80)
+
+[node name="VisionShape" type="Polygon2D" parent="."]
+color = Color(1, 0.0784314, 0.0352941, 0.32549)

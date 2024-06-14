@@ -32,10 +32,12 @@ var fall_of_time = 0
 var wall_timer = 0
 var jump_timer = 0
 var ignore = false
+
 @onready var jump_velocity = 4 * (jump_height / jump_duration)
 @onready var gravity = 2 * (jump_velocity / jump_duration)
 
 @onready var animation = $Animation
+@onready var hit_detection = $HitDetection
 
 func _physics_process(delta):
 
@@ -90,11 +92,6 @@ func _physics_process(delta):
 			velocity.y = jump_velocity * wall_glide_factor
 	play_character_animation()
 	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider() is Slime:
-			emit_signal("hit")
-	
 	move_and_slide()
 
 func play_character_animation():
@@ -131,3 +128,7 @@ func get_gravity_factor() -> float:
 func reset():
 	velocity = Vector2.ZERO
 	position = spawn_position
+
+
+func _on_hit_detection_area_entered(area):
+	emit_signal("hit")

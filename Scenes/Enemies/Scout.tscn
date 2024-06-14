@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b60suko7qmc01"]
+[gd_scene load_steps=11 format=3 uid="uid://b60suko7qmc01"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Scout.gd" id="1_68r78"]
 [ext_resource type="Texture2D" uid="uid://53hgw2hjel10" path="res://Assets/Premium Platformer Asset Pack/Enemies/Mad_Marshmallow.png" id="2_1j43g"]
+[ext_resource type="PackedScene" uid="uid://2ee73vp5aav5" path="res://Scenes/Enemies/vision_cone.tscn" id="3_rufd5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbux5"]
 atlas = ExtResource("2_1j43g")
@@ -45,7 +46,9 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jhsd"]
 size = Vector2(7, 6)
 
-[node name="Scout" type="CharacterBody2D"]
+[node name="Scout" type="CharacterBody2D" groups=["Creature"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_68r78")
 
 [node name="Flip" type="Node2D" parent="."]
@@ -54,22 +57,13 @@ script = ExtResource("1_68r78")
 sprite_frames = SubResource("SpriteFrames_ha72b")
 
 [node name="GroundDetector" type="Area2D" parent="Flip"]
+collision_layer = 0
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/GroundDetector"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_t1138")
 
-[node name="VisionDetector" type="Area2D" parent="Flip"]
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Flip/VisionDetector"]
-position = Vector2(4, 4)
-polygon = PackedVector2Array(0, 0, 80, 0, 80, -24, 0, -7)
-
-[node name="VisionShape" type="Polygon2D" parent="Flip"]
-position = Vector2(4, 4)
-color = Color(1, 0.0784314, 0.0352941, 0.32549)
-polygon = PackedVector2Array(0, 0, 80, 0, 80, -24, 0, -7)
+[node name="VisionCone" parent="Flip" instance=ExtResource("3_rufd5")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -90,7 +84,7 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
-[connection signal="body_entered" from="Flip/VisionDetector" to="." method="_on_vision_detector_body_entered"]
+[connection signal="detected" from="Flip/VisionCone" to="." method="_on_vision_cone_detected"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]
 [connection signal="timeout" from="LookoutTimer" to="." method="_on_lookout_timer_timeout"]
