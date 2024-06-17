@@ -28,7 +28,10 @@ func set_movement(delta):
 				velocity.y = -jump_velocity * 0.8
 	
 func _on_turn_timer_timeout():
-	vision_cone.activate()
+	super()
+
+func _on_lookout_timer_timeout():
+	walking = true
 
 func _on_vision_detector_body_entered(body):
 	if body is Player and flee_timer.time_left <= 0:

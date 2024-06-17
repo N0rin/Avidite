@@ -115,3 +115,4 @@ one_shot = true
 [connection signal="detected" from="Flip/VisionCone" to="." method="_on_vision_cone_detected"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]
+[connection signal="timeout" from="LookoutTimer" to="." method="_on_lookout_timer_timeout"]
