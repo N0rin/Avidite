@@ -33,13 +33,6 @@ func _on_turn_timer_timeout():
 func _on_lookout_timer_timeout():
 	walking = true
 
-func _on_vision_detector_body_entered(body):
-	if body is Player and flee_timer.time_left <= 0:
-		flee_timer.start()
-		toggle_direction()
-		vision_cone.deactivate()
-		move_speed *= 2
-
 func _on_flee_timer_timeout():
 	move_speed /= 2
 	vision_cone.activate()

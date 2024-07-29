@@ -6,9 +6,7 @@ class_name Slime
 @onready var ground_detector = $Flip/GroundDetector
 
 func _ready():
-	spawn_position = position
-	reset()
-	change_direction()
+	super()
 
 func set_movement(delta):
 	if not is_on_floor():
@@ -41,3 +39,6 @@ func reset():
 
 func activate():
 	super()
+
+func noise_received(position):
+	scale *= 2

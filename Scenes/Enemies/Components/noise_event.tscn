@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://rhjrs5fwp0fl"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Components/noise_event.gd" id="1_slyae"]
+[ext_resource type="Texture2D" uid="uid://de632nwkawc5v" path="res://Assets/Other/Kreis.png" id="1_vx84v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6q3t"]
+radius = 64.0
+
+[node name="noise_event" type="Node2D"]
+scale = Vector2(0.125, 0.125)
+script = ExtResource("1_slyae")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_m6q3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_vx84v")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

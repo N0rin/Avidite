@@ -8,6 +8,7 @@ class_name Scout
 @onready var turn_timer = $TurnTimer
 @onready var flee_timer = $FleeTimer
 @onready var lookout_timer = $LookoutTimer
+@onready var noise = $noise_event
 
 @export_group("Vision")
 @export var target: Node
@@ -80,11 +81,17 @@ func stop_walking():
 func activate():
 	super()
 
+func flee(noise_strength):
+	noise.play(noise_strength)
+	walking = true
+	flee_timer.start()
+	toggle_direction()
+	vision_cone.deactivate()
+	move_speed *= 2
 
 func _on_vision_cone_detected(object):
 	if object is Player and flee_timer.time_left <= 0:
-		walking = true
-		flee_timer.start()
-		toggle_direction()
-		vision_cone.deactivate()
-		move_speed *= 2
+		flee(3)
+
+func noise_received(position):
+	pass #let them wait

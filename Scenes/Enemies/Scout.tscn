@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b60suko7qmc01"]
+[gd_scene load_steps=12 format=3 uid="uid://b60suko7qmc01"]
 
 [ext_resource type="Script" path="res://Scenes/Enemies/Scout.gd" id="1_68r78"]
 [ext_resource type="Texture2D" uid="uid://53hgw2hjel10" path="res://Assets/Premium Platformer Asset Pack/Enemies/Mad_Marshmallow.png" id="2_1j43g"]
 [ext_resource type="PackedScene" uid="uid://2ee73vp5aav5" path="res://Scenes/Enemies/vision_cone.tscn" id="3_rufd5"]
+[ext_resource type="PackedScene" uid="uid://rhjrs5fwp0fl" path="res://Scenes/Enemies/Components/noise_event.tscn" id="4_42l3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbux5"]
 atlas = ExtResource("2_1j43g")
@@ -83,6 +84,9 @@ one_shot = true
 process_callback = 0
 wait_time = 2.0
 one_shot = true
+
+[node name="noise_event" parent="." instance=ExtResource("4_42l3k")]
+visible = false
 
 [connection signal="detected" from="Flip/VisionCone" to="." method="_on_vision_cone_detected"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]

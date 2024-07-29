@@ -38,6 +38,7 @@ size = Vector2(7, 8)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_sbour")
+move_speed = 20.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 show_behind_parent = true
@@ -54,7 +55,7 @@ collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionSquare" type="CollisionShape2D" parent="Flip/GroundDetector"]
-position = Vector2(8, 8)
+position = Vector2(6, 16)
 shape = SubResource("RectangleShape2D_nu3ym")
 
 [node name="Area2D" type="Area2D" parent="."]

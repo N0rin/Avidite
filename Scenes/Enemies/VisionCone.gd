@@ -5,7 +5,8 @@ signal detected(object : Object)
 
 @export_flags_2d_physics var collision_mask = 1
 var deactivated = false
-var detection_time = 0.3
+var detection_time = 0.1
+var detection_counter = 0
 var detection_list : Array
 
 func _ready():
@@ -34,20 +35,14 @@ func _process(delta):
 						detected.append(child.get_collider())
 			else:
 				vision_shape.append(child.position + child.target_position.rotated(child.rotation))
-	for detection in detection_list:
-		if detected.find(detection[0]) == -1:
-			detection_list.erase(detection)
-	for detection in detection_list:
+	
+	if detected.is_empty():
+		detection_counter = 0
+	else:
+		detection_counter += delta
+	if detection_counter >= detection_time:
 		for creature in detected:
-			if detection[0] == creature:
-				detection[1] += delta
-				detected.erase(creature)
-	for creature in detected:
-		detection_list.append([creature, 0])
-				
-		for detection in detection_list:
-			if detection[1] >= detection_time:
-				emit_signal("detected", detection[0])
+			emit_signal("detected", creature)
 	
 	$VisionShape.polygon = vision_shape
 
