@@ -41,4 +41,4 @@ func activate():
 	super()
 
 func noise_received(position):
-	scale *= 2
+	pass

@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://yytduyvol0uv"]
+
+[ext_resource type="Script" path="res://Shootplant.gd" id="1_i6pea"]
+[ext_resource type="Texture2D" uid="uid://bsydbfx8d7go8" path="res://Assets/Premium Platformer Asset Pack/Blocks/Mushroom_Platform.png" id="1_n8xtt"]
+[ext_resource type="Texture2D" uid="uid://b31e7todttmuf" path="res://Assets/Premium Platformer Asset Pack/Enemies/Flyfish.png" id="2_pxq87"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wuvm"]
+atlas = ExtResource("1_n8xtt")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0x78v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wuvm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wni7q"]
+atlas = ExtResource("2_pxq87")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1bix"]
+atlas = ExtResource("2_pxq87")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rifx8"]
+atlas = ExtResource("2_pxq87")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5noxu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wni7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1bix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rifx8")
+}],
+"loop": false,
+"name": &"spit",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qdxpm"]
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cvwa"]
+size = Vector2(4, 13)
+
+[node name="Shootplant" type="CharacterBody2D" groups=["Creature"]]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_i6pea")
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Body" type="AnimatedSprite2D" parent="Flip"]
+position = Vector2(0, -8)
+scale = Vector2(0.8, 2)
+sprite_frames = SubResource("SpriteFrames_0x78v")
+
+[node name="Head" type="AnimatedSprite2D" parent="Flip"]
+position = Vector2(-1, -17)
+rotation = -1.5724
+sprite_frames = SubResource("SpriteFrames_5noxu")
+animation = &"spit"
+frame = 1
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="Flip"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/Area2D"]
+position = Vector2(-1, -17)
+shape = SubResource("CircleShape2D_qdxpm")
+
+[node name="ShootStart" type="Node2D" parent="."]
+position = Vector2(-3, -17)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_0cvwa")
+
+[node name="SpitTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="animation_finished" from="Flip/Head" to="." method="_on_head_animation_finished"]
